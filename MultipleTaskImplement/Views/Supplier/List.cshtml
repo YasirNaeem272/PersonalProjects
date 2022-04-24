@@ -1,0 +1,79 @@
+﻿@model IEnumerable<TashBlock.Models.Supplier>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>List</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               SerialNo
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplierName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplierEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CountryCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplierPhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplierAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplierCompanyName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{var i = 0;  }
+@foreach (var item in Model) {
+    i++;
+        <tr>
+            <td>
+                @i
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplierName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplierEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CountryCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplierPhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplierAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplierCompanyName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id,item.SupplierName,item.SupplierEmail,item.CountryCode,item.SupplierPhoneNumber,item.SupplierAddress,item.LocationName,item.SupplierCompanyName },
+               new { @class="btn btn-success"}) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.Id},new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

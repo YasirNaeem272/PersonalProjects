@@ -1,0 +1,51 @@
+﻿@model IEnumerable<TashBlock.Models.Category1>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>List</h1>
+
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
+<table class="table">
+    <thead>
+        <tr>
+           <th>Srno</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+     @{ var i = 0;}
+@foreach (var item in Model) 
+{
+    i++;
+        <tr>
+            <td>
+                @i
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Code)
+            </td>
+            
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id,item.Name,item.Code},new {@class="btn btn-success"}) |
+              
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id  },new { @class="btn btn-danger"})
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

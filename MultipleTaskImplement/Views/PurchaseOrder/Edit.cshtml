@@ -1,0 +1,82 @@
+﻿@model TashBlock.Models.purchaseorder
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>purchaseorder</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Update">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
+            <div class="form-group">
+                <input type="hidden" asp-for="Id" />
+                <label asp-for="PurchaseOrderDate" class="control-label"></label>
+                <input asp-for="PurchaseOrderDate" class="form-control" />
+                <span asp-validation-for="PurchaseOrderDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PurchaseOrderNo" class="control-label"></label>
+                <input asp-for="PurchaseOrderNo" class="form-control" />
+                <span asp-validation-for="PurchaseOrderNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Terms" class="control-label"></label>
+                <input asp-for="Terms" class="form-control" />
+                <span asp-validation-for="Terms" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ref_MroNo" class="control-label"></label>
+                <input asp-for="Ref_MroNo" class="form-control" />
+                <span asp-validation-for="Ref_MroNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Attn" class="control-label"></label>
+                <input asp-for="Attn" class="form-control" />
+                <span asp-validation-for="Attn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FaxNo" class="control-label"></label>
+                <input asp-for="FaxNo" class="form-control" />
+                <span asp-validation-for="FaxNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactPerson" class="control-label"></label>
+                <input asp-for="ContactPerson" class="form-control" />
+                <span asp-validation-for="ContactPerson" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProjectTitle" class="control-label"></label>
+                <input asp-for="ProjectTitle" class="form-control" />
+                <span asp-validation-for="ProjectTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliverTo" class="control-label"></label>
+                <input asp-for="DeliverTo" class="form-control" />
+                <span asp-validation-for="DeliverTo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SupplierName" class="control-label"></label>
+                <input asp-for="SupplierName" class="form-control" />
+                <span asp-validation-for="SupplierName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SupplierLocation" class="control-label"></label>
+                <input asp-for="SupplierLocation" class="form-control" />
+                <span asp-validation-for="SupplierLocation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,204 @@
+﻿@model IEnumerable<TashBlock.Models.purchaseorder>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>List</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<div id="PlaceHolderHere"></div>
+<button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addpurchaseorder"
+        data-url="@Url.Action("Create")">Modal</button>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                SerialNo
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseOrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseOrderNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Terms)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ref_MroNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Attn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FaxNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactPerson)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliverTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplierName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplierLocation)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Value)
+            </th>*@
+            @*<th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalQuality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NetAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiscountOptional)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValueOptional)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalesTax)
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ var i = 0;}
+        @foreach (var item in Model)
+        {
+            i++;
+            <tr>
+                <td>@i</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PurchaseOrderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PurchaseOrderNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Terms)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ref_MroNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Attn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FaxNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactPerson)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliverTo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SupplierName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SupplierLocation)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quality)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Discount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Value)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalQuality)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NetAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiscountOptional)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValueOptional)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalesTax)
+                </td>*@
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new
+               {
+                   id = item.Id,
+                   item.PurchaseOrderDate,
+                   item.PurchaseOrderNo,
+                   item.Terms,
+                   item.Ref_MroNo,
+                   item.Attn,
+                   item.FaxNo,
+                   item.ContactPerson,
+                   item.ProjectTitle,
+                   item.DeliverTo,
+                   item.SupplierName,
+                   item.SupplierLocation,
+                   //item.ProductName,
+                   //item.ProductCode,
+                   //item.Price,
+                   //item.Quality,
+                   //item.Discount,
+                   //item.Value,
+                   //item.Total,
+                   //item.TotalQuality,
+                   //item.NetAmount,
+                   //item.DiscountOptional,
+                   //item.ValueOptional,
+                   //item.SalesTax
+
+               }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
