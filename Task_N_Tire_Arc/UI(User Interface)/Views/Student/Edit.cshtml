@@ -1,0 +1,382 @@
+﻿@model  UI_User_Interface_.Models.Entity_Student
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Template.cshtml";
+}
+
+<h2>Edit</h2>
+<h1 class="text-success" text-align: center;>@TempData["msg"]</h1>
+<div class="right_col" role="main">
+
+    @using (Html.BeginForm("Edit", "Student", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form-group">
+            <input type="hidden" id="Std_Id" name="Std_Id" value="@Model.Std_Id" />
+            <input type="hidden" id="Address_Id" name="Address_Id" value="@Model.Address_Id" />
+            @*<input type="hidden" id="Class_Id" name="Class_Id" value="@Model.Class_Id" />*@
+            @*<input type="hidden" id="Area_Id" name="Area_Id" value="@Model.Area_Id" />*@
+            <label>FirstName</label>
+
+            <input type="text" class="form-control" name="F_Name" value="@Model.F_Name" />
+        </div>
+        <div class="form-group">
+
+            <label>LastName</label>
+
+            <input type="text" class="form-control" name="L_Name" value="@Model.L_Name" />
+        </div>
+        <div class="form-group">
+
+            <label>ContactNumber</label>
+
+            <input type="text" class="form-control" name="Cntct_Number" value="@Model.Cntct_Number" />
+        </div>
+        <div class="form-group">
+
+            <label>Image</label>
+
+            @*<input type="file" class="hidden" id="BrowseImage" accept=".jpg,.jpeg,.png" name="UserImageFile" value="@Model.UserImageFile" />*@
+
+
+
+            <img src="@Url.Content(Session["Image"].ToString())" height="80" width="80" />
+            <input type="file" accept=".jpg,.jpeg,.png" name="UserImageFile" value="@Model.UserImageFile" @*onchange="previewFile()" onload="loadFile()"*@ />
+           
+
+
+        </div>
+        <div class="form-group">
+
+            <label>Class</label>
+
+            <select name="Class_Id" id="selectclass" onchange="GetClassName()">
+                @*<option value="@Model.Class_Id">@Model.Class_Name</option>*@
+
+                @foreach (var item in ViewBag.Class)
+                {
+                    <option value="@item">@item</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+
+            <label>Section</label>
+
+            <select name="Class_Section" id="Section_List" style="
+    width: 120px;
+">
+
+                @*<option value="@Model.Class_Id">@Model.Class_Section</option>*@
+                @foreach (var item in ViewBag.selectedclass)
+                {
+                    if (item.Isselect == 1)
+                    {
+                        <option value="@item.Class_Id" selected>@item.Class_Section</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Class_Id">@item.Class_Section</option>
+                    }
+                }
+            </select>
+        </div>
+
+        @*<div class="form-group">
+
+                <label>Address</label>
+
+                <select name="Address_Id">
+                    <option value="@Model.tb_Address.Address_Id">@Model.tb_Address.Address_Complete_Adres</option>
+                    <option>Select</option>
+                    @foreach (var item in ViewBag.Address)
+                    {
+                        <option value="@item.Address_Id">@item.Address_Complete_Adres</option>
+                    }
+                </select>
+            </div>*@
+        <div class="form-group">
+
+            <label>State</label>
+
+            <select name="State_Id" id="selectstate" onchange="GetState()">
+                @*<option value="@Model.State_Id">@Model.State_Name</option>*@
+
+                @foreach (var item in ViewBag.selectedstate)
+                {
+                    if (item.Isselect == 1)
+                    {
+                        <option value="@item.State_Id" selected>@item.State_Name</option>
+                    }
+                    else
+                    {
+                        <option value="@item.State_Id">@item.State_Name</option>
+                    }
+
+
+
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+
+            <label>City</label>
+
+            <select name="City_Id" id="state_city" onchange="GetArea()">
+                @*<option value="@Model.City_Id" hidden>@Model.City_Name</option>*@
+
+                @foreach (var item in ViewBag.selectedcity)
+                {
+                    @*<option value="0">--Select Country--</option>*@
+
+                    if (item.Isselect == 1)
+                    {
+                        <option value="@item.City_Id" selected>@item.City_Name</option>
+                    }
+                    else
+                    {
+                        <option value="@item.City_Id">@item.City_Name</option>
+                    }
+
+
+
+
+
+                }
+            </select>
+        </div>
+        <div class="form-group">
+
+            <label>Area</label>
+
+            <select name="Area_Id" id="selectId" style="
+    width: 120px;
+">
+                @*<option value="@Model.Area_Id">@Model.Area_Name</option>*@
+                @foreach (var item in ViewBag.selectedarea)
+                {
+
+                    if (item.Isselect == 1)
+                    {
+                        <option value="@item.Area_Id" selected>@item.Area_Name</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Area_Id">@item.Area_Name</option>
+
+                    }
+
+                }
+
+            </select>
+        </div>
+
+        <div class="form-group">
+
+            <button type="submit" class="btn btn-success" value="Edit">submit</button>
+        </div>
+
+    }
+
+</div>
+<script src="~/Script/jquery-3.6.0.min.js"></script>
+
+<script>
+    //debugger
+    //function previewFile() {
+    //    var preview = document.querySelector('UserImageFile');
+    //    var file = document.querySelector('input[type=file]').files[0];
+    //    var reader = new FileReader();
+
+    //    reader.addEventListener("load", function () {
+    //        preview.src = reader.result;
+    //    }, false);
+
+    //    if (file) {
+    //        reader.readAsDataURL(file);
+    //    }
+    //}
+    //function GetClassName() {
+
+    //    $.ajax({
+    //        type: "POST",
+    //        url: '/Student/GetSection',
+    //        data: JSON.stringify({ ClassName: $("#selectclass").val() }),
+    //        dataType: "json",
+    //        contentType: "application/json; charset=utf-8",
+    //        success: function (data) {
+    //            //alert("Data has been added successfully.");
+    //            debugger
+    //            console.log(data);
+    //            console.log(data.length);
+    //            if (data.length === 0) {
+    //                populateSelectClear();
+    //            }
+    //            else {
+    //                populateSelectClear();
+    //                populateSelect(data);
+
+    //            }
+    //        },
+    //        error: function () {
+    //            alert("Error while inserting data");
+    //        }
+    //    });
+
+    //}
+    //function populateSelectClear() {
+    //    document.getElementById("Section_List").innerHTML = "";
+
+    //}
+
+    //function populateSelect(data) {
+    //    var ele = document.getElementById('Section_List');
+    //    data.forEach(function (b) {
+    //        ele.innerHTML += '<option value="' + b.Class_Id + '">' + b['Class_Section'] + '</option>';
+    //    })
+    //}
+    function GetClassName() {
+        if ($("#selectclass").val() <= 0) {
+            alert('Invalid section');
+        }
+        else {
+            $.ajax({
+                type: "POST",
+                url: '/Student/GetSection',
+                data: JSON.stringify({ ClassName: $("#selectclass").val() }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    //alert("Data has been added successfully.");
+                    debugger
+                    console.log(data);
+                    console.log(data.length);
+                    if (data.length === 0) {
+                        populateSelectClear();
+
+                    }
+                    else {
+                        populateSelectClear();
+                        populateSelect(data);
+
+                    }
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            });
+        }
+    }
+    function populateSelectClear() {
+        document.getElementById("Section_List").innerHTML = "";
+
+    }
+
+    function populateSelect(data) {
+        var ele = document.getElementById('Section_List');
+        ele.innerHTML += '<option value="0">SelectSection</option>';
+        data.forEach(function (b) {
+            ele.innerHTML += '<option value="' + b.res2 + '">' + b['res1'] + '</option>';
+        })
+    }
+
+    //States
+    function GetState() {
+        //if ($("#state_city").val() <= 0) {
+        //    alert('Invalid selection');
+        //}
+        //else {
+
+
+            $.ajax({
+                type: "POST",
+                url: '/Student/GetStateRecord',
+                data: JSON.stringify({ StateID: $("#selectstate").val() }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    //alert("Data has been added successfully.");
+                    debugger
+                    console.log(data);
+                    console.log(data.length);
+                    if (data.length === 0) {
+                        populateSelectClear1();
+
+                    }
+                    else {
+                        populateSelectClear1();
+                        populateSelect1(data);
+                        SelectClear(); //Call area function clear
+
+                    }
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            });
+
+        }
+    //}
+    function populateSelectClear1() {
+        document.getElementById("state_city").innerHTML = "";
+
+    }
+
+    function populateSelect1(data) {
+        var ele = document.getElementById('state_city');
+        ele.innerHTML += '<option value="0">SelectCity</option>';
+        data.forEach(function (b) {
+           
+            ele.innerHTML += '<option value="' + b.res3 + '">' + b['res2'] + '</option>';
+        })
+
+    }
+
+    // Area
+
+    function GetArea() {
+        if ($("#state_city").val() <= 0) //this condition cities wise area get
+        {
+            alert('Invalid Selection City');
+        }
+ 
+        else {
+            $.ajax({
+                type: "POST",
+                url: '/Student/GetAreaRecord',
+                data: JSON.stringify({ AreaId: $("#state_city").val() }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    //alert("Data has been added successfully.");
+                    debugger
+                    console.log(data);
+                    console.log(data.length);
+                    if (data.length === 0) {
+                        SelectClear();
+                    }
+                    else {
+                        SelectClear();
+                        Selectdata(data);
+
+                    }
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            });
+        }
+    }
+    function SelectClear() {
+        document.getElementById("selectId").innerHTML = "";
+
+    }
+
+    function Selectdata(data) {
+        var ele = document.getElementById('selectId');
+        ele.innerHTML += '<option value="0">Select Area</option>';
+        data.forEach(function (b) {
+            ele.innerHTML += '<option value="' + b.res2 + '">' + b['res1'] + '</option>';
+        })
+    }
+</script>

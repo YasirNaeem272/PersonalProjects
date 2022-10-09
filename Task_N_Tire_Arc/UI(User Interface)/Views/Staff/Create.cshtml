@@ -1,0 +1,48 @@
+﻿@model BOL_Bussines_Object_Layer_.tb_Staff
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Template.cshtml";
+}
+
+<h2>Create</h2>
+<div class="right_col" role="main">
+
+    @using (Html.BeginForm("Create", "Staff", FormMethod.Post))
+    {
+        <div class="form-group">
+
+            <label>StaffName</label>
+
+            <input type="text" class="form-control" name="Stf_Name" />
+        </div>
+        <div class="form-group">
+
+            <label>StaffGender</label>
+
+            <input type="text" class="form-control" name="Stf_Gender" />
+        </div>
+        <div class="form-group">
+
+            <label>StaffSalary</label>
+
+            <input type="text" class="form-control" name="Stf_Salary" />
+        </div>
+        <div class="form-group">
+
+            <label>StaffCreateOnDate</label>
+
+            <input type="text" class="form-control" name="Stf_Created_On_Date" />
+        </div>
+        <div class="form-group">
+
+            <label>StaffCreatedBuy</label>
+
+            <input type="text" class="form-control" name="Stf_Created_Buy" />
+        </div>
+        <div class="form-group">
+
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+
+    }
+</div>

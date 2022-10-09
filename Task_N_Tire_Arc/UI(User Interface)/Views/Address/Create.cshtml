@@ -1,0 +1,42 @@
+﻿@model BOL_Bussines_Object_Layer_.tb_Address
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Template.cshtml";
+}
+
+<h2>Create</h2>
+
+<div class="right_col" role="main">
+
+    @using (Html.BeginForm("Create", "Address", FormMethod.Post))
+    {
+        <div class="form-group">
+
+            <label>AddressState</label>
+
+            <input type="text" class="form-control" name="Address_State" />
+        </div>
+        <div class="form-group">
+
+            <label>AddressCity</label>
+
+            <input type="text" class="form-control" name="Address_City" />
+        </div>
+        <div class="form-group">
+
+            <label>AddressArea</label>
+
+            <input type="text" class="form-control" name="Address_Area" />
+        </div>
+        <div class="form-group">
+
+            <label>CompleteAddress</label>
+
+            <input type="text" class="form-control" name="Address_Complete_Adres" />
+        </div>
+        <div class="form-group">
+
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    }
+</div>

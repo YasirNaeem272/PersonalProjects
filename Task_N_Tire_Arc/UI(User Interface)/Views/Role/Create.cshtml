@@ -1,0 +1,25 @@
+﻿@model BOL_Bussines_Object_Layer_.tb_Role
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Template.cshtml";
+}
+
+<h2>Create</h2>
+
+<div class="right_col" role="main">
+
+    @using(Html.BeginForm("Create","Role", FormMethod.Post))
+    {
+        <div class="form-group">
+
+            <label>Role</label>
+
+            <input type="text" class="form-control" name="Role_Name" id="qty" />
+        </div>
+        <div class="form-group">
+
+            <button type="submit" class="btn btn-success">submit</button>
+        </div>
+
+    }
+</div>

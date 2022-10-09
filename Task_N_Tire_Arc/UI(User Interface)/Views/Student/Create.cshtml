@@ -1,0 +1,255 @@
+﻿@model UI_User_Interface_.Models.Entity_Student
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Template.cshtml";
+}
+
+<h2>Create</h2>
+
+<div class="right_col" role="main">
+
+    @using (Html.BeginForm("Create", "Student", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <div class="form-group">
+
+            <label>FirstName</label>
+
+            <input type="text" class="form-control" name="F_Name" />
+        </div>
+        <div class="form-group">
+
+            <label>LastName</label>
+
+            <input type="text" class="form-control" name="L_Name" />
+        </div>
+        <div class="form-group">
+
+            <label>ContactNumber</label>
+
+            <input type="text" class="form-control" name="Cntct_Number" />
+        </div>
+        <div class="form-group">
+
+            <label>Image</label>
+
+            <input type="file" class="hidden" id="BrowseImage" accept=".jpg,.jpeg,.png" name="UserImageFile" />
+        </div>
+        <div class="form-group">
+
+            <label>Class</label>
+
+            <select id="selectclass" onchange="GetClassName()">
+                <option>Select</option>
+                @foreach (var item in ViewBag.Class)
+                {
+                    <option value="@item">@item</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+
+            <label>Section</label>
+
+            <select name="Class_Id" id="Section_List" style="
+    width: 120px;
+">
+                <option>Select</option>
+
+            </select>
+        </div>
+
+        @*<div class="form-group">
+
+                <label>Address</label>
+
+                <select>
+                    <option>Select</option>
+                    @foreach (var item in ViewBag.Address)
+                    {
+                        <option value="@item.Address_Id">@item.Address_Complete_Adres</option>
+                    }
+                </select>
+            </div>*@
+
+        <div class="form-group">
+
+            <label>State</label>
+
+            <select name="Area_Name" id="selectstate" onchange="GetState()">
+                <option>Select</option>
+                @foreach (var item in ViewBag.State)
+                {
+                    <option value="@item.State_Id">@item.State_Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+
+            <label>City</label>
+
+            <select name="City_Name" id="state_city" onchange="GetArea()">
+                <option>Select</option>
+
+            </select>
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Area</label>
+
+            <select name="State_Name" id="selectId">
+                <option>Select</option>
+
+            </select>
+        </div>
+        <div class="form-group">
+
+            <button type="submit" class="btn btn-success">submit</button>
+        </div>
+
+    }
+</div>
+<script src="~/Script/jquery-3.6.0.min.js"></script>
+<script>
+    function GetClassName() {
+        if ($("#selectclass").val() <= 0) {
+            alert('Invalid Selection');
+        }
+        else {
+
+
+            $.ajax({
+                type: "POST",
+                url: '/Student/GetSection',
+                data: JSON.stringify({ ClassName: $("#selectclass").val() }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    //alert("Data has been added successfully.");
+                    debugger
+                    console.log(data);
+                    console.log(data.length);
+                    if (data.length === 0) {
+                        populateSelectClear();
+                    }
+                    else {
+                        populateSelectClear();
+                        populateSelect(data);
+
+                    }
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            });
+        }
+    }
+    function populateSelectClear() {
+        document.getElementById("Section_List").innerHTML = "";
+
+    }
+
+    function populateSelect(data) {
+        var ele = document.getElementById('Section_List');
+        ele.innerHTML += '<option value="0">SelectSection</option>';
+        data.forEach(function (b) {
+            ele.innerHTML += '<option value="' + b.res2 + '">' + b['res1'] + '</option>';
+        })
+        
+    }
+
+    //
+    function GetState() {
+
+        $.ajax({
+            type: "POST",
+            url: '/Student/GetStateRecord',
+            data: JSON.stringify({ StateID: $("#selectstate").val() }),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                //alert("Data has been added successfully.");
+                debugger
+                console.log(data);
+                console.log(data.length);
+                if (data.length === 0) {
+                    populateSelectClear1();
+                }
+                else {
+                    populateSelectClear1();
+                    populateSelect1(data);
+
+                }
+            },
+            error: function () {
+                alert("Error while inserting data");
+            }
+        });
+
+    }
+    function populateSelectClear1() {
+        document.getElementById("state_city").innerHTML = "";
+
+    }
+
+    function populateSelect1(data) {
+        var ele = document.getElementById('state_city');
+        ele.innerHTML += '<option value="0">SelectCity</option>';
+        data.forEach(function (b) {
+            ele.innerHTML += '<option value="' + b.res3 + '">' + b['res2'] + '</option>';
+        })
+
+    }
+
+    // Area
+
+    function GetArea() {
+        if ($("#state_city").val() <= 0) //this condition cities wise area get
+        {
+            alert('Invalid Selection City');
+        }
+
+        else {
+
+            $.ajax({
+                type: "POST",
+                url: '/Student/GetAreaRecord',
+                data: JSON.stringify({ AreaId: $("#state_city").val() }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    //alert("Data has been added successfully.");
+                    debugger
+                    console.log(data);
+                    console.log(data.length);
+                    if (data.length === 0) {
+                        SelectClear();
+                    }
+                    else {
+                        SelectClear();
+                        Selectdata(data);
+
+                    }
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            });
+        }
+
+    }
+    function SelectClear() {
+        document.getElementById("selectId").innerHTML = "";
+
+    }
+
+    function Selectdata(data) {
+        var ele = document.getElementById('selectId');
+        ele.innerHTML += '<option value="0">SelectArea</option>';
+        data.forEach(function (b) {
+            ele.innerHTML += '<option value="' + b.res2 + '">' + b['res1'] + '</option>';
+        })
+    }
+</script>

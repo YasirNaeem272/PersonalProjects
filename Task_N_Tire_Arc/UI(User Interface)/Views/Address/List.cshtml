@@ -1,0 +1,42 @@
+﻿@model IEnumerable<BOL_Bussines_Object_Layer_.tb_Address>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Template.cshtml";
+}
+
+<h2>List</h2>
+
+
+<div class="right_col" role="main">
+    <table class="table table-hover" id="mytable">
+
+        <a class="btn btn-primary" href="@Url.Action("Create","Address")">Create</a>
+        <tr>
+            <th>Address_State</th>
+            <th>Address_City</th>
+            <th>Address_Area</th>
+            <th>Address_Complete_Adres</th>
+          
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Address_State</td>
+                <td>@item.Address_City</td>
+                <td>@item.Address_Area</td>
+                <td>@item.Address_Complete_Adres</td>
+              
+
+
+
+                <td>
+                    <a href="@Url.Action("Edit/"+item.Address_Id+"","Address")" class="btn btn-success">Edit</a>
+
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>

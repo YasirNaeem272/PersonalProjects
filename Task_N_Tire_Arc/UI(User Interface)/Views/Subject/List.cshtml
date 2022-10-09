@@ -1,0 +1,52 @@
+﻿@model IEnumerable<BOL_Bussines_Object_Layer_.tb_Subject>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Template.cshtml";
+}
+
+<h2>List</h2>
+<div class="right_col" role="main">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Sub_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stf_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Class_Id)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sub_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sub_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stf_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Class_Id)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit/" + item.Sub_Id + "", "Subject")
+                    @*<a href="@Url.Action("Edit/"+item.Sub_Id+"","Subject")" class="btn btn-success">Edit</a>*@
+
+                </td>
+            </tr>
+        }
+
+    </table>
+    </div>

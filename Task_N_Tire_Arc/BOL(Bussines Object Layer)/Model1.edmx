@@ -1,0 +1,796 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_Address">
+          <Key>
+            <PropertyRef Name="Address_Id" />
+          </Key>
+          <Property Name="Address_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address_State" Type="varchar" MaxLength="50" />
+          <Property Name="Address_City" Type="varchar" MaxLength="50" />
+          <Property Name="Address_Area" Type="varchar" MaxLength="50" />
+          <Property Name="Address_Complete_Adres" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tb_Area">
+          <Key>
+            <PropertyRef Name="Area_Id" />
+          </Key>
+          <Property Name="Area_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Area_Name" Type="varchar" MaxLength="50" />
+          <Property Name="City_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_City">
+          <Key>
+            <PropertyRef Name="City_Id" />
+          </Key>
+          <Property Name="City_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City_Name" Type="varchar" MaxLength="50" />
+          <Property Name="State_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Class">
+          <Key>
+            <PropertyRef Name="Class_Id" />
+          </Key>
+          <Property Name="Class_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Class_Name" Type="nvarchar" MaxLength="25" />
+          <Property Name="Class_Section" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="tb_Paper">
+          <Key>
+            <PropertyRef Name="Paper_Id" />
+          </Key>
+          <Property Name="Paper_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Paper_Name" Type="varchar" MaxLength="25" />
+          <Property Name="Paper_Sub_Marks" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Paper_Obt_Marks" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Std_Id" Type="int" Nullable="false" />
+          <Property Name="Sub_Id" Type="int" Nullable="false" />
+          <Property Name="Class_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Role">
+          <Key>
+            <PropertyRef Name="Role_Id" />
+          </Key>
+          <Property Name="Role_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role_Name" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="tb_Staff">
+          <Key>
+            <PropertyRef Name="Stf_Id" />
+          </Key>
+          <Property Name="Stf_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Stf_Name" Type="varchar" MaxLength="25" />
+          <Property Name="Stf_Gender" Type="varchar" MaxLength="25" />
+          <Property Name="Stf_Salary" Type="money" />
+          <Property Name="Stf_Created_On_Date" Type="datetime" />
+          <Property Name="Stf_Created_Buy" Type="int" Nullable="false" />
+          <Property Name="Address_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_State">
+          <Key>
+            <PropertyRef Name="State_Id" />
+          </Key>
+          <Property Name="State_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="State_Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tb_Student">
+          <Key>
+            <PropertyRef Name="Std_Id" />
+          </Key>
+          <Property Name="Std_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Std_F_Name" Type="varchar" MaxLength="25" />
+          <Property Name="Std_L_Name" Type="varchar" MaxLength="25" />
+          <Property Name="Std_Cntct_Number" Type="int" />
+          <Property Name="Std_Image" Type="nvarchar(max)" />
+          <Property Name="Class_Id" Type="int" Nullable="false" />
+          <Property Name="Address_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Subject">
+          <Key>
+            <PropertyRef Name="Sub_Id" />
+          </Key>
+          <Property Name="Sub_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sub_Name" Type="varchar" MaxLength="25" />
+          <Property Name="Stf_Id" Type="int" Nullable="false" />
+          <Property Name="Class_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_User">
+          <Key>
+            <PropertyRef Name="Usr_Id" />
+          </Key>
+          <Property Name="Usr_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usr_Name" Type="varchar" MaxLength="25" />
+          <Property Name="Usr_Email" Type="nvarchar" MaxLength="25" />
+          <Property Name="Usr_Password" Type="nvarchar" MaxLength="25" />
+          <Property Name="Role_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tb_Area__City_Id__6754599E">
+          <End Role="tb_City" Type="Self.tb_City" Multiplicity="1" />
+          <End Role="tb_Area" Type="Self.tb_Area" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_City">
+              <PropertyRef Name="City_Id" />
+            </Principal>
+            <Dependent Role="tb_Area">
+              <PropertyRef Name="City_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_City__State_I__6477ECF3">
+          <End Role="tb_State" Type="Self.tb_State" Multiplicity="1" />
+          <End Role="tb_City" Type="Self.tb_City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_State">
+              <PropertyRef Name="State_Id" />
+            </Principal>
+            <Dependent Role="tb_City">
+              <PropertyRef Name="State_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_Paper__Class___5FB337D6">
+          <End Role="tb_Class" Type="Self.tb_Class" Multiplicity="1" />
+          <End Role="tb_Paper" Type="Self.tb_Paper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Class">
+              <PropertyRef Name="Class_Id" />
+            </Principal>
+            <Dependent Role="tb_Paper">
+              <PropertyRef Name="Class_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_Paper__Std_Id__5DCAEF64">
+          <End Role="tb_Student" Type="Self.tb_Student" Multiplicity="1" />
+          <End Role="tb_Paper" Type="Self.tb_Paper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Student">
+              <PropertyRef Name="Std_Id" />
+            </Principal>
+            <Dependent Role="tb_Paper">
+              <PropertyRef Name="Std_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_Paper__Sub_Id__5EBF139D">
+          <End Role="tb_Subject" Type="Self.tb_Subject" Multiplicity="1" />
+          <End Role="tb_Paper" Type="Self.tb_Paper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Subject">
+              <PropertyRef Name="Sub_Id" />
+            </Principal>
+            <Dependent Role="tb_Paper">
+              <PropertyRef Name="Sub_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_Staff__Addres__571DF1D5">
+          <End Role="tb_Address" Type="Self.tb_Address" Multiplicity="1" />
+          <End Role="tb_Staff" Type="Self.tb_Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Address">
+              <PropertyRef Name="Address_Id" />
+            </Principal>
+            <Dependent Role="tb_Staff">
+              <PropertyRef Name="Address_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_Staff__Stf_Cr__5629CD9C">
+          <End Role="tb_User" Type="Self.tb_User" Multiplicity="1" />
+          <End Role="tb_Staff" Type="Self.tb_Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_User">
+              <PropertyRef Name="Usr_Id" />
+            </Principal>
+            <Dependent Role="tb_Staff">
+              <PropertyRef Name="Stf_Created_Buy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_Studen__Addre__4E88ABD4">
+          <End Role="tb_Address" Type="Self.tb_Address" Multiplicity="1" />
+          <End Role="tb_Student" Type="Self.tb_Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Address">
+              <PropertyRef Name="Address_Id" />
+            </Principal>
+            <Dependent Role="tb_Student">
+              <PropertyRef Name="Address_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_Studen__Class__4D94879B">
+          <End Role="tb_Class" Type="Self.tb_Class" Multiplicity="1" />
+          <End Role="tb_Student" Type="Self.tb_Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Class">
+              <PropertyRef Name="Class_Id" />
+            </Principal>
+            <Dependent Role="tb_Student">
+              <PropertyRef Name="Class_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_Subjec__Class__5AEE82B9">
+          <End Role="tb_Class" Type="Self.tb_Class" Multiplicity="1" />
+          <End Role="tb_Subject" Type="Self.tb_Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Class">
+              <PropertyRef Name="Class_Id" />
+            </Principal>
+            <Dependent Role="tb_Subject">
+              <PropertyRef Name="Class_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_Subjec__Stf_I__59FA5E80">
+          <End Role="tb_Staff" Type="Self.tb_Staff" Multiplicity="1" />
+          <End Role="tb_Subject" Type="Self.tb_Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Staff">
+              <PropertyRef Name="Stf_Id" />
+            </Principal>
+            <Dependent Role="tb_Subject">
+              <PropertyRef Name="Stf_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_User__Role_Id__534D60F1">
+          <End Role="tb_Role" Type="Self.tb_Role" Multiplicity="1" />
+          <End Role="tb_User" Type="Self.tb_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Role">
+              <PropertyRef Name="Role_Id" />
+            </Principal>
+            <Dependent Role="tb_User">
+              <PropertyRef Name="Role_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TestModelStoreContainer">
+          <EntitySet Name="tb_Address" EntityType="Self.tb_Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Area" EntityType="Self.tb_Area" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_City" EntityType="Self.tb_City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Class" EntityType="Self.tb_Class" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Paper" EntityType="Self.tb_Paper" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Role" EntityType="Self.tb_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Staff" EntityType="Self.tb_Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_State" EntityType="Self.tb_State" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Student" EntityType="Self.tb_Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Subject" EntityType="Self.tb_Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_User" EntityType="Self.tb_User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tb_Area__City_Id__6754599E" Association="Self.FK__tb_Area__City_Id__6754599E">
+            <End Role="tb_City" EntitySet="tb_City" />
+            <End Role="tb_Area" EntitySet="tb_Area" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_City__State_I__6477ECF3" Association="Self.FK__tb_City__State_I__6477ECF3">
+            <End Role="tb_State" EntitySet="tb_State" />
+            <End Role="tb_City" EntitySet="tb_City" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_Paper__Class___5FB337D6" Association="Self.FK__tb_Paper__Class___5FB337D6">
+            <End Role="tb_Class" EntitySet="tb_Class" />
+            <End Role="tb_Paper" EntitySet="tb_Paper" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_Paper__Std_Id__5DCAEF64" Association="Self.FK__tb_Paper__Std_Id__5DCAEF64">
+            <End Role="tb_Student" EntitySet="tb_Student" />
+            <End Role="tb_Paper" EntitySet="tb_Paper" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_Paper__Sub_Id__5EBF139D" Association="Self.FK__tb_Paper__Sub_Id__5EBF139D">
+            <End Role="tb_Subject" EntitySet="tb_Subject" />
+            <End Role="tb_Paper" EntitySet="tb_Paper" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_Staff__Addres__571DF1D5" Association="Self.FK__tb_Staff__Addres__571DF1D5">
+            <End Role="tb_Address" EntitySet="tb_Address" />
+            <End Role="tb_Staff" EntitySet="tb_Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_Staff__Stf_Cr__5629CD9C" Association="Self.FK__tb_Staff__Stf_Cr__5629CD9C">
+            <End Role="tb_User" EntitySet="tb_User" />
+            <End Role="tb_Staff" EntitySet="tb_Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_Studen__Addre__4E88ABD4" Association="Self.FK__tb_Studen__Addre__4E88ABD4">
+            <End Role="tb_Address" EntitySet="tb_Address" />
+            <End Role="tb_Student" EntitySet="tb_Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_Studen__Class__4D94879B" Association="Self.FK__tb_Studen__Class__4D94879B">
+            <End Role="tb_Class" EntitySet="tb_Class" />
+            <End Role="tb_Student" EntitySet="tb_Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_Subjec__Class__5AEE82B9" Association="Self.FK__tb_Subjec__Class__5AEE82B9">
+            <End Role="tb_Class" EntitySet="tb_Class" />
+            <End Role="tb_Subject" EntitySet="tb_Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_Subjec__Stf_I__59FA5E80" Association="Self.FK__tb_Subjec__Stf_I__59FA5E80">
+            <End Role="tb_Staff" EntitySet="tb_Staff" />
+            <End Role="tb_Subject" EntitySet="tb_Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_User__Role_Id__534D60F1" Association="Self.FK__tb_User__Role_Id__534D60F1">
+            <End Role="tb_Role" EntitySet="tb_Role" />
+            <End Role="tb_User" EntitySet="tb_User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_Address">
+          <Key>
+            <PropertyRef Name="Address_Id" />
+          </Key>
+          <Property Name="Address_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address_State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address_City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address_Area" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address_Complete_Adres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_Staff" Relationship="Self.FK__tb_Staff__Addres__571DF1D5" FromRole="tb_Address" ToRole="tb_Staff" />
+          <NavigationProperty Name="tb_Student" Relationship="Self.FK__tb_Studen__Addre__4E88ABD4" FromRole="tb_Address" ToRole="tb_Student" />
+        </EntityType>
+        <EntityType Name="tb_Area">
+          <Key>
+            <PropertyRef Name="Area_Id" />
+          </Key>
+          <Property Name="Area_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Area_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_City" Relationship="Self.FK__tb_Area__City_Id__6754599E" FromRole="tb_Area" ToRole="tb_City" />
+        </EntityType>
+        <EntityType Name="tb_City">
+          <Key>
+            <PropertyRef Name="City_Id" />
+          </Key>
+          <Property Name="City_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_Area" Relationship="Self.FK__tb_Area__City_Id__6754599E" FromRole="tb_City" ToRole="tb_Area" />
+          <NavigationProperty Name="tb_State" Relationship="Self.FK__tb_City__State_I__6477ECF3" FromRole="tb_City" ToRole="tb_State" />
+        </EntityType>
+        <EntityType Name="tb_Class">
+          <Key>
+            <PropertyRef Name="Class_Id" />
+          </Key>
+          <Property Name="Class_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Class_Name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Class_Section" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_Paper" Relationship="Self.FK__tb_Paper__Class___5FB337D6" FromRole="tb_Class" ToRole="tb_Paper" />
+          <NavigationProperty Name="tb_Student" Relationship="Self.FK__tb_Studen__Class__4D94879B" FromRole="tb_Class" ToRole="tb_Student" />
+          <NavigationProperty Name="tb_Subject" Relationship="Self.FK__tb_Subjec__Class__5AEE82B9" FromRole="tb_Class" ToRole="tb_Subject" />
+        </EntityType>
+        <EntityType Name="tb_Paper">
+          <Key>
+            <PropertyRef Name="Paper_Id" />
+          </Key>
+          <Property Name="Paper_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Paper_Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Paper_Sub_Marks" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Paper_Obt_Marks" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Std_Id" Type="Int32" Nullable="false" />
+          <Property Name="Sub_Id" Type="Int32" Nullable="false" />
+          <Property Name="Class_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_Class" Relationship="Self.FK__tb_Paper__Class___5FB337D6" FromRole="tb_Paper" ToRole="tb_Class" />
+          <NavigationProperty Name="tb_Student" Relationship="Self.FK__tb_Paper__Std_Id__5DCAEF64" FromRole="tb_Paper" ToRole="tb_Student" />
+          <NavigationProperty Name="tb_Subject" Relationship="Self.FK__tb_Paper__Sub_Id__5EBF139D" FromRole="tb_Paper" ToRole="tb_Subject" />
+        </EntityType>
+        <EntityType Name="tb_Role">
+          <Key>
+            <PropertyRef Name="Role_Id" />
+          </Key>
+          <Property Name="Role_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role_Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_User" Relationship="Self.FK__tb_User__Role_Id__534D60F1" FromRole="tb_Role" ToRole="tb_User" />
+        </EntityType>
+        <EntityType Name="tb_Staff">
+          <Key>
+            <PropertyRef Name="Stf_Id" />
+          </Key>
+          <Property Name="Stf_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Stf_Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Stf_Gender" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Stf_Salary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Stf_Created_On_Date" Type="DateTime" Precision="3" />
+          <Property Name="Stf_Created_Buy" Type="Int32" Nullable="false" />
+          <Property Name="Address_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_Address" Relationship="Self.FK__tb_Staff__Addres__571DF1D5" FromRole="tb_Staff" ToRole="tb_Address" />
+          <NavigationProperty Name="tb_User" Relationship="Self.FK__tb_Staff__Stf_Cr__5629CD9C" FromRole="tb_Staff" ToRole="tb_User" />
+          <NavigationProperty Name="tb_Subject" Relationship="Self.FK__tb_Subjec__Stf_I__59FA5E80" FromRole="tb_Staff" ToRole="tb_Subject" />
+        </EntityType>
+        <EntityType Name="tb_State">
+          <Key>
+            <PropertyRef Name="State_Id" />
+          </Key>
+          <Property Name="State_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="State_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_City" Relationship="Self.FK__tb_City__State_I__6477ECF3" FromRole="tb_State" ToRole="tb_City" />
+        </EntityType>
+        <EntityType Name="tb_Student">
+          <Key>
+            <PropertyRef Name="Std_Id" />
+          </Key>
+          <Property Name="Std_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Std_F_Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Std_L_Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Std_Cntct_Number" Type="Int32" />
+          <Property Name="Std_Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Class_Id" Type="Int32" Nullable="false" />
+          <Property Name="Address_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_Address" Relationship="Self.FK__tb_Studen__Addre__4E88ABD4" FromRole="tb_Student" ToRole="tb_Address" />
+          <NavigationProperty Name="tb_Class" Relationship="Self.FK__tb_Studen__Class__4D94879B" FromRole="tb_Student" ToRole="tb_Class" />
+          <NavigationProperty Name="tb_Paper" Relationship="Self.FK__tb_Paper__Std_Id__5DCAEF64" FromRole="tb_Student" ToRole="tb_Paper" />
+        </EntityType>
+        <EntityType Name="tb_Subject">
+          <Key>
+            <PropertyRef Name="Sub_Id" />
+          </Key>
+          <Property Name="Sub_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sub_Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Stf_Id" Type="Int32" Nullable="false" />
+          <Property Name="Class_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_Class" Relationship="Self.FK__tb_Subjec__Class__5AEE82B9" FromRole="tb_Subject" ToRole="tb_Class" />
+          <NavigationProperty Name="tb_Paper" Relationship="Self.FK__tb_Paper__Sub_Id__5EBF139D" FromRole="tb_Subject" ToRole="tb_Paper" />
+          <NavigationProperty Name="tb_Staff" Relationship="Self.FK__tb_Subjec__Stf_I__59FA5E80" FromRole="tb_Subject" ToRole="tb_Staff" />
+        </EntityType>
+        <EntityType Name="tb_User">
+          <Key>
+            <PropertyRef Name="Usr_Id" />
+          </Key>
+          <Property Name="Usr_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usr_Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Usr_Email" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Usr_Password" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Role_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_Role" Relationship="Self.FK__tb_User__Role_Id__534D60F1" FromRole="tb_User" ToRole="tb_Role" />
+          <NavigationProperty Name="tb_Staff" Relationship="Self.FK__tb_Staff__Stf_Cr__5629CD9C" FromRole="tb_User" ToRole="tb_Staff" />
+        </EntityType>
+        <Association Name="FK__tb_Staff__Addres__571DF1D5">
+          <End Role="tb_Address" Type="Self.tb_Address" Multiplicity="1" />
+          <End Role="tb_Staff" Type="Self.tb_Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Address">
+              <PropertyRef Name="Address_Id" />
+            </Principal>
+            <Dependent Role="tb_Staff">
+              <PropertyRef Name="Address_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_Studen__Addre__4E88ABD4">
+          <End Role="tb_Address" Type="Self.tb_Address" Multiplicity="1" />
+          <End Role="tb_Student" Type="Self.tb_Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Address">
+              <PropertyRef Name="Address_Id" />
+            </Principal>
+            <Dependent Role="tb_Student">
+              <PropertyRef Name="Address_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_Area__City_Id__6754599E">
+          <End Role="tb_City" Type="Self.tb_City" Multiplicity="1" />
+          <End Role="tb_Area" Type="Self.tb_Area" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_City">
+              <PropertyRef Name="City_Id" />
+            </Principal>
+            <Dependent Role="tb_Area">
+              <PropertyRef Name="City_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_City__State_I__6477ECF3">
+          <End Role="tb_State" Type="Self.tb_State" Multiplicity="1" />
+          <End Role="tb_City" Type="Self.tb_City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_State">
+              <PropertyRef Name="State_Id" />
+            </Principal>
+            <Dependent Role="tb_City">
+              <PropertyRef Name="State_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_Paper__Class___5FB337D6">
+          <End Role="tb_Class" Type="Self.tb_Class" Multiplicity="1" />
+          <End Role="tb_Paper" Type="Self.tb_Paper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Class">
+              <PropertyRef Name="Class_Id" />
+            </Principal>
+            <Dependent Role="tb_Paper">
+              <PropertyRef Name="Class_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_Studen__Class__4D94879B">
+          <End Role="tb_Class" Type="Self.tb_Class" Multiplicity="1" />
+          <End Role="tb_Student" Type="Self.tb_Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Class">
+              <PropertyRef Name="Class_Id" />
+            </Principal>
+            <Dependent Role="tb_Student">
+              <PropertyRef Name="Class_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_Subjec__Class__5AEE82B9">
+          <End Role="tb_Class" Type="Self.tb_Class" Multiplicity="1" />
+          <End Role="tb_Subject" Type="Self.tb_Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Class">
+              <PropertyRef Name="Class_Id" />
+            </Principal>
+            <Dependent Role="tb_Subject">
+              <PropertyRef Name="Class_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_Paper__Std_Id__5DCAEF64">
+          <End Role="tb_Student" Type="Self.tb_Student" Multiplicity="1" />
+          <End Role="tb_Paper" Type="Self.tb_Paper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Student">
+              <PropertyRef Name="Std_Id" />
+            </Principal>
+            <Dependent Role="tb_Paper">
+              <PropertyRef Name="Std_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_Paper__Sub_Id__5EBF139D">
+          <End Role="tb_Subject" Type="Self.tb_Subject" Multiplicity="1" />
+          <End Role="tb_Paper" Type="Self.tb_Paper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Subject">
+              <PropertyRef Name="Sub_Id" />
+            </Principal>
+            <Dependent Role="tb_Paper">
+              <PropertyRef Name="Sub_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_User__Role_Id__534D60F1">
+          <End Role="tb_Role" Type="Self.tb_Role" Multiplicity="1" />
+          <End Role="tb_User" Type="Self.tb_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Role">
+              <PropertyRef Name="Role_Id" />
+            </Principal>
+            <Dependent Role="tb_User">
+              <PropertyRef Name="Role_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_Staff__Stf_Cr__5629CD9C">
+          <End Role="tb_User" Type="Self.tb_User" Multiplicity="1" />
+          <End Role="tb_Staff" Type="Self.tb_Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_User">
+              <PropertyRef Name="Usr_Id" />
+            </Principal>
+            <Dependent Role="tb_Staff">
+              <PropertyRef Name="Stf_Created_Buy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_Subjec__Stf_I__59FA5E80">
+          <End Role="tb_Staff" Type="Self.tb_Staff" Multiplicity="1" />
+          <End Role="tb_Subject" Type="Self.tb_Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Staff">
+              <PropertyRef Name="Stf_Id" />
+            </Principal>
+            <Dependent Role="tb_Subject">
+              <PropertyRef Name="Stf_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TestEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_Address" EntityType="Self.tb_Address" />
+          <EntitySet Name="tb_Area" EntityType="Self.tb_Area" />
+          <EntitySet Name="tb_City" EntityType="Self.tb_City" />
+          <EntitySet Name="tb_Class" EntityType="Self.tb_Class" />
+          <EntitySet Name="tb_Paper" EntityType="Self.tb_Paper" />
+          <EntitySet Name="tb_Role" EntityType="Self.tb_Role" />
+          <EntitySet Name="tb_Staff" EntityType="Self.tb_Staff" />
+          <EntitySet Name="tb_State" EntityType="Self.tb_State" />
+          <EntitySet Name="tb_Student" EntityType="Self.tb_Student" />
+          <EntitySet Name="tb_Subject" EntityType="Self.tb_Subject" />
+          <EntitySet Name="tb_User" EntityType="Self.tb_User" />
+          <AssociationSet Name="FK__tb_Staff__Addres__571DF1D5" Association="Self.FK__tb_Staff__Addres__571DF1D5">
+            <End Role="tb_Address" EntitySet="tb_Address" />
+            <End Role="tb_Staff" EntitySet="tb_Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_Studen__Addre__4E88ABD4" Association="Self.FK__tb_Studen__Addre__4E88ABD4">
+            <End Role="tb_Address" EntitySet="tb_Address" />
+            <End Role="tb_Student" EntitySet="tb_Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_Area__City_Id__6754599E" Association="Self.FK__tb_Area__City_Id__6754599E">
+            <End Role="tb_City" EntitySet="tb_City" />
+            <End Role="tb_Area" EntitySet="tb_Area" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_City__State_I__6477ECF3" Association="Self.FK__tb_City__State_I__6477ECF3">
+            <End Role="tb_State" EntitySet="tb_State" />
+            <End Role="tb_City" EntitySet="tb_City" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_Paper__Class___5FB337D6" Association="Self.FK__tb_Paper__Class___5FB337D6">
+            <End Role="tb_Class" EntitySet="tb_Class" />
+            <End Role="tb_Paper" EntitySet="tb_Paper" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_Studen__Class__4D94879B" Association="Self.FK__tb_Studen__Class__4D94879B">
+            <End Role="tb_Class" EntitySet="tb_Class" />
+            <End Role="tb_Student" EntitySet="tb_Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_Subjec__Class__5AEE82B9" Association="Self.FK__tb_Subjec__Class__5AEE82B9">
+            <End Role="tb_Class" EntitySet="tb_Class" />
+            <End Role="tb_Subject" EntitySet="tb_Subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_Paper__Std_Id__5DCAEF64" Association="Self.FK__tb_Paper__Std_Id__5DCAEF64">
+            <End Role="tb_Student" EntitySet="tb_Student" />
+            <End Role="tb_Paper" EntitySet="tb_Paper" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_Paper__Sub_Id__5EBF139D" Association="Self.FK__tb_Paper__Sub_Id__5EBF139D">
+            <End Role="tb_Subject" EntitySet="tb_Subject" />
+            <End Role="tb_Paper" EntitySet="tb_Paper" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_User__Role_Id__534D60F1" Association="Self.FK__tb_User__Role_Id__534D60F1">
+            <End Role="tb_Role" EntitySet="tb_Role" />
+            <End Role="tb_User" EntitySet="tb_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_Staff__Stf_Cr__5629CD9C" Association="Self.FK__tb_Staff__Stf_Cr__5629CD9C">
+            <End Role="tb_User" EntitySet="tb_User" />
+            <End Role="tb_Staff" EntitySet="tb_Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_Subjec__Stf_I__59FA5E80" Association="Self.FK__tb_Subjec__Stf_I__59FA5E80">
+            <End Role="tb_Staff" EntitySet="tb_Staff" />
+            <End Role="tb_Subject" EntitySet="tb_Subject" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TestModelStoreContainer" CdmEntityContainer="TestEntities2">
+          <EntitySetMapping Name="tb_Address">
+            <EntityTypeMapping TypeName="TestModel.tb_Address">
+              <MappingFragment StoreEntitySet="tb_Address">
+                <ScalarProperty Name="Address_Id" ColumnName="Address_Id" />
+                <ScalarProperty Name="Address_State" ColumnName="Address_State" />
+                <ScalarProperty Name="Address_City" ColumnName="Address_City" />
+                <ScalarProperty Name="Address_Area" ColumnName="Address_Area" />
+                <ScalarProperty Name="Address_Complete_Adres" ColumnName="Address_Complete_Adres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Area">
+            <EntityTypeMapping TypeName="TestModel.tb_Area">
+              <MappingFragment StoreEntitySet="tb_Area">
+                <ScalarProperty Name="Area_Id" ColumnName="Area_Id" />
+                <ScalarProperty Name="Area_Name" ColumnName="Area_Name" />
+                <ScalarProperty Name="City_Id" ColumnName="City_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_City">
+            <EntityTypeMapping TypeName="TestModel.tb_City">
+              <MappingFragment StoreEntitySet="tb_City">
+                <ScalarProperty Name="City_Id" ColumnName="City_Id" />
+                <ScalarProperty Name="City_Name" ColumnName="City_Name" />
+                <ScalarProperty Name="State_Id" ColumnName="State_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Class">
+            <EntityTypeMapping TypeName="TestModel.tb_Class">
+              <MappingFragment StoreEntitySet="tb_Class">
+                <ScalarProperty Name="Class_Id" ColumnName="Class_Id" />
+                <ScalarProperty Name="Class_Name" ColumnName="Class_Name" />
+                <ScalarProperty Name="Class_Section" ColumnName="Class_Section" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Paper">
+            <EntityTypeMapping TypeName="TestModel.tb_Paper">
+              <MappingFragment StoreEntitySet="tb_Paper">
+                <ScalarProperty Name="Paper_Id" ColumnName="Paper_Id" />
+                <ScalarProperty Name="Paper_Name" ColumnName="Paper_Name" />
+                <ScalarProperty Name="Paper_Sub_Marks" ColumnName="Paper_Sub_Marks" />
+                <ScalarProperty Name="Paper_Obt_Marks" ColumnName="Paper_Obt_Marks" />
+                <ScalarProperty Name="Std_Id" ColumnName="Std_Id" />
+                <ScalarProperty Name="Sub_Id" ColumnName="Sub_Id" />
+                <ScalarProperty Name="Class_Id" ColumnName="Class_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Role">
+            <EntityTypeMapping TypeName="TestModel.tb_Role">
+              <MappingFragment StoreEntitySet="tb_Role">
+                <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+                <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Staff">
+            <EntityTypeMapping TypeName="TestModel.tb_Staff">
+              <MappingFragment StoreEntitySet="tb_Staff">
+                <ScalarProperty Name="Stf_Id" ColumnName="Stf_Id" />
+                <ScalarProperty Name="Stf_Name" ColumnName="Stf_Name" />
+                <ScalarProperty Name="Stf_Gender" ColumnName="Stf_Gender" />
+                <ScalarProperty Name="Stf_Salary" ColumnName="Stf_Salary" />
+                <ScalarProperty Name="Stf_Created_On_Date" ColumnName="Stf_Created_On_Date" />
+                <ScalarProperty Name="Stf_Created_Buy" ColumnName="Stf_Created_Buy" />
+                <ScalarProperty Name="Address_Id" ColumnName="Address_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_State">
+            <EntityTypeMapping TypeName="TestModel.tb_State">
+              <MappingFragment StoreEntitySet="tb_State">
+                <ScalarProperty Name="State_Id" ColumnName="State_Id" />
+                <ScalarProperty Name="State_Name" ColumnName="State_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Student">
+            <EntityTypeMapping TypeName="TestModel.tb_Student">
+              <MappingFragment StoreEntitySet="tb_Student">
+                <ScalarProperty Name="Std_Id" ColumnName="Std_Id" />
+                <ScalarProperty Name="Std_F_Name" ColumnName="Std_F_Name" />
+                <ScalarProperty Name="Std_L_Name" ColumnName="Std_L_Name" />
+                <ScalarProperty Name="Std_Cntct_Number" ColumnName="Std_Cntct_Number" />
+                <ScalarProperty Name="Std_Image" ColumnName="Std_Image" />
+                <ScalarProperty Name="Class_Id" ColumnName="Class_Id" />
+                <ScalarProperty Name="Address_Id" ColumnName="Address_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Subject">
+            <EntityTypeMapping TypeName="TestModel.tb_Subject">
+              <MappingFragment StoreEntitySet="tb_Subject">
+                <ScalarProperty Name="Sub_Id" ColumnName="Sub_Id" />
+                <ScalarProperty Name="Sub_Name" ColumnName="Sub_Name" />
+                <ScalarProperty Name="Stf_Id" ColumnName="Stf_Id" />
+                <ScalarProperty Name="Class_Id" ColumnName="Class_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_User">
+            <EntityTypeMapping TypeName="TestModel.tb_User">
+              <MappingFragment StoreEntitySet="tb_User">
+                <ScalarProperty Name="Usr_Id" ColumnName="Usr_Id" />
+                <ScalarProperty Name="Usr_Name" ColumnName="Usr_Name" />
+                <ScalarProperty Name="Usr_Email" ColumnName="Usr_Email" />
+                <ScalarProperty Name="Usr_Password" ColumnName="Usr_Password" />
+                <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
