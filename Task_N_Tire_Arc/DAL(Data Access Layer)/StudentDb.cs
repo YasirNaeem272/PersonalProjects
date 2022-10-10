@@ -296,3 +296,7 @@ public class getclass
     public int res2;
 }
 
+public class check
+{
+
+}
